@@ -9,7 +9,6 @@ for t in range(1,T+1):
     for i in range(9):
         for j in range(9):
             sudoku_R[j][i] = sudoku[i][j]
-    #3*3칸 비교
     for i in range(9):
         for j in range(9):
             arr = []
@@ -31,3 +30,4 @@ for t in range(1,T+1):
             break
 
     print(f"#{t} {answer}")
+
