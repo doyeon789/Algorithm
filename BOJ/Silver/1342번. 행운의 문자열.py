@@ -1,4 +1,6 @@
-s = input()
+mport sys
+
+s = sys.stdin.readline().strip()
  
 lucky = set()
 visited = [False]*len(s)
