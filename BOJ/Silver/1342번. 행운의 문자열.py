@@ -1,22 +1,20 @@
 from collections import Counter
+import sys
 
-string = input()
-N = len(string)
-
-cnt = Counter(string)
-
-ans = 0 
-def dfs(prev, length):
+def backTracking(prev, length):
     global ans
-    if length == N:
+    if length == len(string):
         ans += 1
         return
     
     for ch in cnt:
         if cnt[ch] > 0 and ch != prev:
             cnt[ch] -= 1
-            dfs(ch, length + 1)
+            backTracking(ch, length + 1)
             cnt[ch] += 1
-dfs('', 0)
 
+string = string = sys.stdin.readline().strip()
+cnt = Counter(string)
+ans = 0 
+backTracking('', 0)
 print(ans)
