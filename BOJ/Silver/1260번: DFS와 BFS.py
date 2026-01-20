@@ -32,7 +32,25 @@ def bfs(start):
             if not visited_bfs[next_v]:
                 visited_bfs[next_v] = True
                 queue.append(next_v)
-
 dfs(v)
 print()
 bfs(v)
+"""
+def bfs(start):
+    queue = [start]
+    visited_bfs[start] = True
+    idx = 0
+
+    while idx < len(queue):
+        v = queue[idx]
+        idx += 1
+        print(v, end=' ')
+        for next_v in graph[v]:
+            if not visited_bfs[next_v]:
+                visited_bfs[next_v] = True
+                queue.append(next_v)
+"""
+
+
+
+
