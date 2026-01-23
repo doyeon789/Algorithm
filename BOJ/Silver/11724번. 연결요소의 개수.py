@@ -1,15 +1,8 @@
-from collections import deque
-
-def bfs(start):
-    queue = deque()
-    queue.append(start)
+def dfs(start):
     visited[start] = True
-    while queue:
-        v = queue.popleft()
-        for next_v in graph[v]:
-            if not visited[next_v]:
-                visited[next_v] = True
-                queue.append(next_v)
+    for next_v in graph[v]:
+        if not visited[next_v]:
+            dfs(next_v)
     return
 
 
@@ -27,7 +20,7 @@ count = 0
 
 for i in range(1,Vertex+1):
     if visited[i] == False:
-        bfs(i)
+        dfs(i)
         count += 1
 
 print(count)
