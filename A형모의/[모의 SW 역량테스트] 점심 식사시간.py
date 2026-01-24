@@ -11,7 +11,8 @@ def simulate(arrival_times, stair_len):
     # 도착 시간 기준 정렬
     arrival_times.sort()
 
-    q = deque()   # 계단을 내려가고 있는 사람들의 종료 시간
+    q = deque()   
+    # 계단을 내려가고 있는 사람들의 종료 시간
     time = 0
 
     for arrive in arrival_times:
@@ -23,7 +24,7 @@ def simulate(arrival_times, stair_len):
         while len(q) == 3:
             time = max(time, q.popleft())
 
-        # 계단 진입 → stair_len분 후 종료
+        # 계단 진입 -> stair_len분 후 종료
         q.append(time + stair_len)
 
     # 가장 늦게 끝난 사람이 전체 종료 시간
@@ -57,37 +58,35 @@ def dfs(idx, stair0, stair1):
         stair1 + [dist[idx][1] + 1]   # 이동시간 + 1
     )
 
-
-# =========================
-# 입력 처리
-# =========================
+# 테스트 케이스 갯수 입력 받기
 T = int(input())
 
+# 테스트케이스 수 만큼 반복
 for tc in range(1, T + 1):
-    N = int(input())
-    grid = [list(map(int, input().split())) for _ in range(N)]
+    N = int(input())                                            # 그리드 사이즈 입력 받기
+    grid = [list(map(int, input().split())) for _ in range(N)]  # 그리드 입력 받기
 
-    people = []
-    stairs = []
+    people = [] # 사람 위치 저장
+    stairs = [] # 계단 위치 및 길이 저장
 
     # 사람과 계단 위치 수집
     for i in range(N):
         for j in range(N):
-            if grid[i][j] == 1:
-                people.append((i, j))
-            elif grid[i][j] > 1:
-                stairs.append((i, j, grid[i][j]))
+            if grid[i][j] == 1:                     # grid의 i,j값이 1 이면
+                people.append((i, j))               # people 변수에 (i,j) 추가
+            elif grid[i][j] > 1:                    # gird의 i,j값이 2 이상이면
+                stairs.append((i, j, grid[i][j]))   # stair 변수에 (i,j,grid[i][j]) 추가 
 
-    P = len(people)
+    P = len(people) # 사람의 수를 구하는 변수
 
     # =========================
-    # 사람 → 계단 거리 계산
+    # 사람 -> 계단 거리 계산
     # =========================
-    dist = [[0] * 2 for _ in range(P)]
+    dist = [[0] * 2 for _ in range(P)]  # (거리 변수) 변수사람의 수 만큼 (0,0) 배열 변수 만들어 놓기
     for i in range(P):
         for s in range(2):
-            dist[i][s] = abs(people[i][0] - stairs[s][0]) + \
-                         abs(people[i][1] - stairs[s][1])
+            # dist 변수에 2개의 거리 추가하기
+            dist[i][s] = abs(people[i][0] - stairs[s][0]) + abs(people[i][1] - stairs[s][1])
 
     answer = float('inf')
 
