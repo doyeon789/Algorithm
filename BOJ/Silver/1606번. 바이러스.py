@@ -1,18 +1,26 @@
-n=int(input())
-v=int(input())
+computer = int(input())
+connect = int(input())
 
-graph = [[] for i in range(n+1)]
-visited=[0]*(n+1)
+graph = [[] for _ in range(computer+1)]
 
-for i in range(v):
-    a,b=map(int,input().split())
+for _ in range(connect):
+    a,b = map(int,input().split())
     graph[a].append(b)
     graph[b].append(a)
 
-def dfs(v):
-    visited[v]=1
-    for nx in graph[v]:
-        if visited[nx]==0:
-            dfs(nx)
+count = 0
+
+visited = [False] * (computer+1)
+
+def dfs(n):
+    global count
+    for d in graph[n]:
+        if not visited[d]:
+            visited[d] = True
+            count += 1
+            dfs(d)
+
+visited[1] = True
 dfs(1)
-print(sum(visited)-1)
+
+print(count)
