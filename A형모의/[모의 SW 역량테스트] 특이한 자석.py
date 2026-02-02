@@ -19,7 +19,6 @@ for tc in range(1,T+1):
     
         temp = d
         for i in range(n - 1, -1, -1):
-            print("****")
             if gears[i][2] != gears[i + 1][6]:
                 temp *= -1
                 move.append((i, temp))
