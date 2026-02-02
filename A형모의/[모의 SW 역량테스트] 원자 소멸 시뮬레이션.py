@@ -28,7 +28,6 @@ for tc in range(1, T + 1) :
                     result += score[3]
             else :
                 if -1000 <= location[l][0][0] <= 1000 and -1000 <= location[l][0][1] <= 1000 :
-                    print(location[l][0][0], location[l][0][1])
                     atom.append(location[l][0])
 
     print(f"#{tc} {result}")
