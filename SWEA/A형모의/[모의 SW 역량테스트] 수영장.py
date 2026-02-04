@@ -1,9 +1,4 @@
 
-month_money = list(map(int, input().split()))
-days = list(map(int, input().split()))
-
-answer = month_money[3]
-
 def dfs(month, cost):
     global answer
 
@@ -21,5 +16,13 @@ def dfs(month, cost):
         dfs(month + 1, cost + month_money[1])
         dfs(month + 3, cost + month_money[2])
 
-dfs(0, 0)
-print(answer)
+T = int(input())
+for tc in range(1,T+1):
+    month_money = list(map(int, input().split()))
+    days = list(map(int, input().split()))
+
+    answer = month_money[3]
+
+    dfs(0, 0)
+    print(f"#{tc} {answer}")
+    
