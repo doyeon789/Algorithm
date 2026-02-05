@@ -37,10 +37,11 @@ def play_game(i, j, d):
         if (r, c) == (start_i, start_j) or borard[r][c] == -1:
             return score
         
-        #
+        # 벽을 만나면 방향 전환, 점수 =1
         if 1 <= borard[r][c] <= 5:
             d = change_dir[borard[r][c]][d]
             score += 1
+        # 웜홀만나면 해당 웜홀 위치로 이동
         elif 6 <= borard[r][c] <= 10:
             r, c = wormhole_info[(r, c)]
 
@@ -66,10 +67,6 @@ for tc in range(1,T+1):
                     wormhole_info[wormhole_check[num]] = (i, j)
                     wormhole_info[(i, j)] = wormhole_check[num]
     borard.append([5] * (n+2)) #board의 마지막 행 5로 채우기
-
-    print(wormhole_check)
-    print(wormhole_info)
-    
     result = 0
     for i in range(1, n+1):
         for j in range(1, n+1):
