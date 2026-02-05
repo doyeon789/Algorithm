@@ -38,5 +38,4 @@ stack.push(3)
 print(stack.pop())
 print(stack.pop())
 print(stack.pop())
-print(stack.pop())
 
