@@ -15,10 +15,6 @@ inorder = []
 postorder = []
 
 def dfs(node):
-    if node == 0:
-        print(node)
-        return
-
     # 전위 순회
     preorder.append(node)
 
