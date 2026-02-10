@@ -6,44 +6,54 @@
 
 M 시간 격리됨. -> 미생물들의 총합을 구하여라
 '''
-
 def simulation(microbes):
+    # 일단 M시간 만큼 시뮬 돌리기
+
+
     for _ in range(M):
         locations = {}
-        
-        # 미생물 위치 이동
-        for x, y, cnt, d in microbes:
-            nx = x + dx[d-1]
-            ny = y + dy[d-1]
-
-            #약 밟으면
-            if nx == 0 or ny == 0 or nx == N-1 or ny == N-1:
-                cnt //= 2
-                d = reverse[d-1] + 1
-                if cnt == 0:
-                    continue
+        for i,j,num,dir in microbes:
+            ni = i + dx[dir-1]
+            nj = j + dy[dir-1]
             
+            #약품 처리된곳을 밟았을때
+            if ni == 0 or nj == 0 or ni == N-1 or nj == N-1:
+                num //= 2
+                dir = reverse[dir-1] + 1
+                if num == 0:
+                    continue
+
             #미생물 위치값 갱신, 정보 저장
-            if (nx, ny) not in locations:
-                locations[(nx, ny)] = []
-            locations[(nx, ny)].append((cnt, d))
+            if (ni, nj) not in locations:
+                locations[(ni, nj)] = []
+            locations[(ni, nj)].append((num, dir))
 
         # 합치기
-        microbes = []
+        new_microbes = []
         for (x, y), group in locations.items():
             if len(group) == 1:
-                microbes.append([x, y, group[0][0], group[0][1]])
-            else:
-                total = sum(c for c, _ in group)
-                _, direction = max(group)
-                microbes.append([x, y, total, direction])
-        
+                num, dir = group[0]
+                new_microbes.append([x, y, num, dir])
+                continue
+
+            total_count = 0
+            max_count = -1
+            selected_dir = 0 
+
+            for num, dir in group:
+                total_count += num
+
+                if num > max_count:
+                    max_count = num
+                    selected_dir = dir
+            new_microbes.append([x, y, total_count, selected_dir])
+
+        microbes = new_microbes
     return microbes
 
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 reverse = [1, 0, 3, 2]
-
 
 T = int(input())
 for tc in range(1, T+1):
@@ -53,3 +63,17 @@ for tc in range(1, T+1):
     answer = sum(m[2] for m in result)
 
     print(f"#{tc} {answer}")
+
+'''
+1
+7 2 9   
+1 1 7 1 
+2 1 7 1
+5 1 5 4
+3 2 8 4 
+4 3 14 1
+3 4 3 3 
+1 5 8 2 
+3 5 100 1
+5 5 1 1
+'''
