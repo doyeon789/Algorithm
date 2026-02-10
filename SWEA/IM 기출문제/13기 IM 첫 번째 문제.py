@@ -1,41 +1,58 @@
-dx = [0, 1, 0, -1]
-dy = [1, 0, -1, 0]
+from collections import deque
+
+dx = [0,1,0,-1]
+dy = [1,0,-1,0]
+
+def get_len(r,c):
+
+
+    q = deque()
+    q.append((r,c))
+    cnt = 1
+
+    while q:
+        i, j = q.popleft()
+
+        min_value = mx_num+1
+        mi = 0
+        mj = 0
+
+        for d in range(4):
+            ni = i + dx[d]
+            nj = j + dy[d]
+            if 0 <= ni < N and 0 <= nj < N:     
+                if grid[ni][nj] < grid[i][j]:    
+                    if min_value > grid[ni][nj]:
+                        min_value = grid[ni][nj]
+                        mi = ni
+                        mj = nj
+
+        if min_value == mx_num+1:
+            continue
+        else:
+            q.append((mi,mj))
+            cnt += 1
+    return cnt
+
 
 T = int(input())
-
-def get_len(x, y):
-    candidates = []
-
-    for d in range(4):
-        nx = x + dx[d]
-        ny = y + dy[d]
-
-        if 0 <= nx < n and 0 <= ny < n:
-            if grid[nx][ny] < grid[x][y]:
-                candidates.append((grid[nx][ny], nx, ny))
-
-    if not candidates:
-        return 1
-
-    min_val = candidates[0][0]
-    nx, ny = candidates[0][1], candidates[0][2]
-
-    for value, x2, y2 in candidates[1:]:
-        if value < min_val:
-            min_val = value
-            nx, ny = x2, y2
-    return 1 + get_len(nx, ny)
-
-for tc in range(1, T + 1):
-    n = int(input())
-    grid = [list(map(int, input().split())) for _ in range(n)]
+for tc in range(1,T+1):
+    N = int(input())
+    grid = [list(map(int, input().split())) for _ in range(N)]
 
     mx_num = max(map(max, grid))
     ans = 0
 
-    for i in range(n):
-        for j in range(n):
-            if grid[i][j] == mx_num:
+    for i in range(N):
+        for j in range(N):
+            if mx_num == grid[i][j]:
                 ans = max(ans, get_len(i, j))
 
     print(f"#{tc} {ans}")
+'''
+1
+3
+1 15 3
+2 20 6
+3 14 9
+'''
