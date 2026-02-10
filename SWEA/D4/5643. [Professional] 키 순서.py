@@ -25,7 +25,7 @@ for tc in range(1, T+1):
 
     for _ in range(M):
         a, b = map(int, input().split())
-        graph[a].append(b)          # a < b
+        graph[a].append(b)
         reversed_graph[b].append(a)
 
     answer = 0
@@ -33,7 +33,7 @@ for tc in range(1, T+1):
     for i in range(1, N+1):
         smaller = than_cnt(reversed_graph, i)
         taller = than_cnt(graph, i)
-        
+
         if smaller + taller == N - 1:
             answer += 1
 
