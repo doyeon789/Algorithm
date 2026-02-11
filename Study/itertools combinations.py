@@ -8,12 +8,17 @@ def combinations(arr,r):
         else:
             return
         
-        yield (arr[i] for i in idx)
+        yield tuple(arr[i] for i in idx)
 
         for i in reversed(range(r)):
-            if
+            if idx[i] != i + len(arr) - r:
+                
+                idx[i] += 1
+                
+                for j in range(i + 1, r):
+                    idx[j] = idx[j - 1] + 1                    
+                break
 
 
-combinations([1,2,3,4,5],3)
-
-
+for i in combinations([1,2,3,4,5],3):
+    print(i)
