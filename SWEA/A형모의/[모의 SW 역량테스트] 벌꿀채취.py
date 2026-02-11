@@ -34,9 +34,6 @@ for tc in range(1,T+1):
             dfs(0,0,0,i,j)
             honey_h1[i][j] = max_honey
 
-    from pprint import pprint
-    pprint(honey_h1, width = 30)
-
     
     for i1 in range(N):
         for j1 in range(N-(M-1)):
