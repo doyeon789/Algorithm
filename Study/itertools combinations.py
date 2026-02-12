@@ -12,7 +12,7 @@ def combinations(arr,r):
 
         for i in reversed(range(r)):
             if idx[i] != i + len(arr) - r:
-                
+ 
                 idx[i] += 1
                 
                 for j in range(i + 1, r):
