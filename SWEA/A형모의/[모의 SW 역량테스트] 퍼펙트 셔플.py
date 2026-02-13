@@ -1,15 +1,20 @@
-T = int(input())
-for tc in range(1, T+1):
-    N = int(input())
-    deck = input().split()
-    
-    mid = N // 2
-    bf_deck = deck[:mid]
-    af_deck = deck[mid:]
-    
-    new_deck = []
-    for i in range(mid):
-        new_deck.append(bf_deck[i])
-        new_deck.append(af_deck[i])
-    
-    print(' '.join(new_deck))
+t = int(input())
+
+for tc in range(1, t + 1) :
+    n = int(input())
+    data = list(input().split())
+    if len(data) % 2 == 0 :
+        a_list = data[:len(data)//2]
+        b_list = data[len(data)//2:]
+    else :
+        a_list = data[:len(data) // 2 + 1]
+        b_list = data[len(data) // 2 + 1:]
+    result = []
+
+    while a_list or b_list :
+        if a_list :
+            result.append(a_list.pop(0))
+        if b_list :
+            result.append(b_list.pop(0))
+
+    print(f'#{tc}', *result)
