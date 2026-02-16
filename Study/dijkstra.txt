@@ -1,0 +1,29 @@
+def dijkstra():
+
+    dist = [[INF] * N for _ in range(N)]
+    visited = [[False] * N for _ in range(N)]
+    
+    dist[0][0] = 0
+    
+    for _ in range(N * N):
+        
+        # 방문 안 한 정점 중 최소 dist 찾기
+        min_cost = INF
+        min_x, min_y = -1, -1
+        
+        for i in range(N):
+            for j in range(N):
+                if not visited[i][j] and dist[i][j] < min_cost:
+                    min_cost = dist[i][j]
+                    min_x, min_y = i, j
+        
+        # 선택한 정점 방문 처리
+        visited[min_x][min_y] = True
+        
+        # 인접 정점 갱신
+        for nx, ny in 인접한_정점들:
+            
+            new_cost = dist[min_x][min_y] + 이동비용
+            
+            if new_cost < dist[nx][ny]:
+                dist[nx][ny] = new_cost
