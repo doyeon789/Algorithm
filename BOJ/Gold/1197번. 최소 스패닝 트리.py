@@ -1,0 +1,73 @@
+import sys
+input = sys.stdin.readline
+
+# 정점 개수 V, 간선 개수 E
+V, E = map(int, input().split())
+
+# 모든 간선을 저장할 리스트
+edges = []
+
+# 간선 입력
+for _ in range(E):
+    a, b, cost = map(int, input().split())
+    
+    # (가중치, 정점1, 정점2) 형태로 저장
+    # → 나중에 가중치 기준으로 정렬하기 위해
+    edges.append((cost, a, b))
+
+
+#  가중치 기준 오름차순 정렬
+# → 가장 작은 간선부터 선택하기 위함
+edges.sort()
+
+
+#  Union-Find를 위한 부모 배열 생성
+# 처음에는 자기 자신이 부모 (각자 독립 집합)
+parent = [i for i in range(V + 1)]
+
+
+#  부모 찾기 (Find 함수)
+def find(x):
+    # 자기 자신이 부모가 아니라면
+    if parent[x] != x:
+        # 재귀적으로 최상위 부모 찾기
+        # + 경로 압축 (찾으면서 바로 연결)
+        parent[x] = find(parent[x])
+    
+    return parent[x]
+
+
+# 두 집합 합치기 (Union 함수)
+def union(a, b):
+    # 각각의 루트(최상위 부모) 찾기
+    rootA = find(a)
+    rootB = find(b)
+
+    # 서로 다른 집합이면 합치기
+    if rootA != rootB:
+        parent[rootB] = rootA
+        # rootB 집합을 rootA 집합에 붙임
+
+
+total = 0   # MST 총 비용 저장
+count = 0   # 선택한 간선 개수
+
+
+#  작은 간선부터 하나씩 확인
+for cost, a, b in edges:
+
+    # 두 정점이 다른 집합에 있을 때만 선택
+    # → 같은 집합이면 사이클 발생
+    if find(a) != find(b):
+        
+        union(a, b)        # 집합 합치기
+        total += cost      # 비용 더하기
+        count += 1         # 간선 하나 선택
+
+        # MST는 간선 V-1개 선택하면 완성
+        if count == V - 1:
+            break
+
+
+# 최소 스패닝 트리 총 비용 출력
+print(total)
