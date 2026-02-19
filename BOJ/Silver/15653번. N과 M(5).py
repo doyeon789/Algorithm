@@ -10,8 +10,9 @@ def dfs(start):
         print()
         return
     
-    for i in range(start,N+1):
-        result.append(i)
-        dfs(i+1)
-        result.pop()
+    for i in range(1, N+1):
+        if i not in result:
+            result.append(i)
+            dfs(start+1)
+            result.pop()
 dfs(1)
