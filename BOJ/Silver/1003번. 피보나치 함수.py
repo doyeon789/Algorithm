@@ -1,20 +1,12 @@
-def fibonacci(n):
-    global cnt_zero
-    global cnt_one
-    if (n == 0):
-        cnt_zero+=1
-        return 0
-    elif (n == 1):
-        cnt_one+=1
-        return 1
-    else:
-        return fibonacci(n-1) + fibonacci(n-2)
-
 T = int(input())
 
+d = [[1,0],[0,1]]
+
+for i in range(2,41):
+    a = d[i-1][0] + d[i-2][0]
+    b = d[i-1][1] + d[i-2][1]
+    d.append([a,b])
+
 for _ in range(T):
-    cnt_zero=0
-    cnt_one=0
-    N = int(input())
-    fibonacci(N)
-    print(cnt_zero, cnt_one)
+    n = int(input())
+    print(d[n][0], d[n][1])
