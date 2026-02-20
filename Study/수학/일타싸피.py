@@ -28,5 +28,3 @@ theta = math.atan2(contact_y - sy, contact_x - sx)
 
 print(math.degrees(theta))
 
-
-
