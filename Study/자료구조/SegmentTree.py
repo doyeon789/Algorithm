@@ -58,14 +58,13 @@ print(interval_sum(0, len(arr)-1, 1, 0, 9))
 print(interval_sum(0, len(arr)-1, 1, 0, 2))
 print(interval_sum(0, len(arr)-1, 1, 6, 7))
 
-# arr[0]를 +4만큼 수정
-update(0, len(arr)-1, 1, 0, 4)
-print(interval_sum(0, len(arr)-1, 1, 0, 2))
+# arr[0]을 +4만큼 수정
+update(0, len(arr) - 1, 1, 0, 4)
+print(interval_sum(0, len(arr) - 1, 1, 0, 2))   # 0부터 2까지의 구간 합 ((1 + 4) + 2 + 3)
 
-
-# arr[9]를 +4만큼 수정
-update(0, len(arr)-1, 1, 9, 11)
-print(interval_sum(0, len(arr)-1, 1, 8, 2))
+# arr[9]를 -11만큼 수정
+update(0, len(arr) - 1, 1, 9, -11)
+print(interval_sum(0, len(arr) - 1, 1, 8, 9))   # 8부터 9까지의 구간 합 (9 + (10 - 11))
 
 
 
