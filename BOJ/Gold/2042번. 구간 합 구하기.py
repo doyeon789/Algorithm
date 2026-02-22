@@ -44,7 +44,7 @@ for _ in range(M + K):
     a, b, c = map(int, input().split())
     
     if a == 1:
-        b -= 1
+        b -= 1 
         diff = c - arr[b]
         arr[b] = c
         update(0, N-1, 1, b, diff)
