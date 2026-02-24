@@ -1,25 +1,25 @@
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
-def dfs(x, y, depth, is_used):
+def dfs(i, j, depth, is_used):
     global result
 
     result = max(result, depth)
 
     for d in range(4):
-        ni = x + dx[d]
-        nj = y + dy[d]
+        ni = i + dx[d]
+        nj = j + dy[d]
 
         if 0 <= ni < N and 0 <= nj < N:
             if not visited[ni][nj]:
-                if arr[ni][nj] < arr[x][y]:
+                if arr[ni][nj] < arr[i][j]:
                     visited[ni][nj] = True
                     dfs(ni, nj, depth + 1, is_used)
                     visited[ni][nj] = False
 
-                elif not is_used and arr[ni][nj] - K < arr[x][y]:
+                elif not is_used and arr[ni][nj] - K < arr[i][j]:
                     original_height = arr[ni][nj]
-                    arr[ni][nj] = arr[x][y] - 1
+                    arr[ni][nj] = arr[i][j] - 1
 
                     visited[ni][nj] = True
                     dfs(ni, nj, depth + 1, True)
