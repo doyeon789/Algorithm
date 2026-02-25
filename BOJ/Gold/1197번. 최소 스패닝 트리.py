@@ -69,5 +69,6 @@ for cost, a, b in edges:
             break
 
 
+
 # 최소 스패닝 트리 총 비용 출력
 print(total)
