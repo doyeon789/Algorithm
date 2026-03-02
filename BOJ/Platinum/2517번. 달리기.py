@@ -1,44 +1,24 @@
 import sys
 input = sys.stdin.readline
 
-def update(i):
-    while i <= n:
-        tree[i] += 1
-        i += (i & -i)
+def updatefen(i):
+  while i<=M:
+    fen[i] += 1
+    i += i&-i
 
-def query(i):
-    s = 0
-    while i > 0:
-        s += tree[i]
-        i -= (i & -i)
-    return s
+def sumfen(i):
+  SUM = 0
+  while i:
+    SUM += fen[i]
+    i -= i&-i
+  return SUM
 
-n = int(input())
-arr = [int(input()) for _ in range(n)]
+N = int(input()); M = 1<<19
+data = sorted([(int(input()),i) for i in range(1,N+1)],reverse=True)
 
-sorted_unique = sorted(set(arr))
-compress = {value: i+1 for i, value in enumerate(sorted_unique)}
+fen = [0]*(M+1); result = [0]*N
+for x,i in data:
+  result[i-1] = sumfen(i-1)+1
+  updatefen(i)
 
-compressed_arr = [compress[x] for x in arr]
-
-tree = [0] * (n + 1)
-
-for skill in compressed_arr:
-    total = query(n)
-    not_bigger = query(skill)
-    bigger = total - not_bigger
-    
-    print(bigger + 1)
-    
-    update(skill)
-"""
-8
-2
-8
-10
-7
-1
-9
-4
-15
-"""
+print(*result,sep="\n")
