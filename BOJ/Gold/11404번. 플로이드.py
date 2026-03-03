@@ -1,7 +1,7 @@
 import sys
 input = sys.stdin.readline
 
-INF = float('inf')
+INF = 10**15
 
 N = int(input())
 M = int(input())
@@ -24,7 +24,7 @@ for k in range(1, N+1):
 for a in range(1, N+1):
     for b in range(1, N+1):
         if graph[a][b] == INF:
-            print('INF', end=' ')
+            print('0', end=' ')
         else:
             print(graph[a][b], end= ' ')
     print()
