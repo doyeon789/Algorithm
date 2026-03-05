@@ -24,12 +24,12 @@ parent = [i for i in range(V + 1)]
 
 
 #  부모 찾기 (Find 함수)
-def find(x):
+def find(parent, x):
     # 자기 자신이 부모가 아니라면
     if parent[x] != x:
         # 재귀적으로 최상위 부모 찾기
         # + 경로 압축 (찾으면서 바로 연결)
-        parent[x] = find(parent[x])
+        parent[x] = find(parent, parent[x])
     
     return parent[x]
 
