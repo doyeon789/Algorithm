@@ -14,8 +14,7 @@
 # 1. dp배열의 2번째 인덱스 최대값 구하기
 """ 
 #2번째인자 b는 2^b가 트리의 높이가 되므로 높이가 N일때 최대 b가 된다.
-def getMaxIndex():
-    return int(ceil(math.log(N)/math.log(2))) + 1
+max_ind = math.ceil(math.log2(N)) + 1
 """
 # 2. dfs탐색을 통해 각 노드의 높이와 1번째 (2^0)부모 노드값 초기화 해주기
 """
